@@ -1,13 +1,20 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { View, Text, TextInput, TouchableOpacity } from "react-native"
 import { FontAwesome } from "@expo/vector-icons"
-import firebase from "../../config/firebaseconfig.js"
+import firebase, { storage } from "../../config/firebaseconfig.js"
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
+import { v4 } from "uuid"
 import styles from "./style.js"
 
 export default function NewGame({ navigation, route }, props) {
     const [nome, setNome] = useState(null)
     const [marca, setMarca] = useState(null)
     const [preco, setPreco] = useState(null)
+
+    const [imageList, setImageList] = useState([])
+    const [imageUpload, setImageUpload] = useState(null)
+    const imageListRef = ref(storage, "images/")
+
     const database = firebase.firestore()
 
     function addProduct() {
@@ -19,6 +26,28 @@ export default function NewGame({ navigation, route }, props) {
         })
         navigation.navigate("Games")
     }
+
+    const uploadImage = () => {
+        if(imageUpload == null) return
+
+        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`)
+
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url)=> {
+                setImageList((prev) => [...prev, url])
+            })
+        })
+    }
+
+    useEffect(() => {
+        listAll(imageListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) =>{
+                    setImageList((prev) => [...prev, url])
+                })
+            })
+        })
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -50,7 +79,19 @@ export default function NewGame({ navigation, route }, props) {
             <input
                 type="file"
                 style={styles.inputText}
+                onChange={(event) => {
+                    setImageUpload(event.target.files[0])
+                }}
             />
+            <button onClick={uploadImage}>
+                Upload
+            </button>
+
+                <br />
+            {imageList.map((url) => {
+                return <img src={url}/>
+            })}
+
             <TouchableOpacity
                 style={styles.buttonNewProduct}
                 onPress={() => {
