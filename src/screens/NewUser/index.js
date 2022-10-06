@@ -18,7 +18,6 @@ export default function NewUser({ navigation }) {
     const [password, setPassword] = useState("")
     const [errorRegister, setErrorRegister] = useState("")
 
-    //Não funciona pois foi feito com base em documentação antiga
     const registerFirebase = () => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
@@ -37,10 +36,8 @@ export default function NewUser({ navigation }) {
     }, [])
 
     return (
-        //Arrastar a página para cima quando abrir o teclado
         <KeyboardAvoidingView
-            //Não funciona pois foi feito com base em documentação antiga
-            //behavior={Platform.OS === "ios" ? "padding" : "height"}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
         >
             <Text style={styles.title}>
@@ -66,7 +63,6 @@ export default function NewUser({ navigation }) {
                 onChangeText={(text) => setPassword(text)}
                 value={password}
             />
-            {/* Mensagem de erro */}
             {errorRegister === true
                 ?
                 <View style={styles.contentAlert}>
@@ -82,9 +78,7 @@ export default function NewUser({ navigation }) {
                 :
                 <View />
             }
-            {/* Validação se os campos estiverem vazios */}
             {email === "" || password === ""
-                //verdadeiro
                 ?
                 <TouchableOpacity
                     style={styles.buttonRegister}
@@ -94,7 +88,6 @@ export default function NewUser({ navigation }) {
                         Register
                     </Text>
                 </TouchableOpacity>
-                //falso
                 :
                 <TouchableOpacity
                     style={styles.buttonRegister}
