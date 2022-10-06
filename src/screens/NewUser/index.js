@@ -37,7 +37,7 @@ export default function NewUser({ navigation }) {
 
     return (
         <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            //behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
         >
             <Text style={styles.title}>
