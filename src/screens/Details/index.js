@@ -3,7 +3,8 @@ import {
     View, 
     Text, 
     TextInput, 
-    TouchableOpacity 
+    TouchableOpacity, 
+    Image
 } from "react-native"
 import { FontAwesome } from "@expo/vector-icons"
 import firebase from "../../config/firebaseconfig.js"
@@ -12,6 +13,7 @@ import styles from "./style.js"
 export default function Details({ navigation, route }) {
     const [nomeEdit, setNomeEdit] = useState(route.params.nome)
     const [marcaEdit, setMarcaEdit] = useState(route.params.marca)
+    const [imageEdit, setImageEdit] = useState(route.params.image)
     const [precoEdit, setPrecoEdit] = useState(route.params.preco)
     const idProduct = route.params.id
     const database = firebase.firestore()
@@ -52,6 +54,8 @@ export default function Details({ navigation, route }) {
                 onChangeText={setPrecoEdit}
                 value={precoEdit}
             />
+            <Text style={styles.label}>Image</Text>
+            <Image source={imageEdit} style={styles.image} />
             <TouchableOpacity
                 style={styles.buttonNewProduct}
                 onPress={() => {

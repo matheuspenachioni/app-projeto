@@ -7,6 +7,9 @@ import NewUser from "./src/screens/NewUser"
 import Game from "./src/screens/Game"
 import NewGame from "./src/screens/NewGame"
 import Details from "./src/screens/Details/"
+import Profile from "./src/screens/Profile/"
+import NewProfile from "./src/screens/NewProfile/"
+import ProfileDetails from "./src/screens/ProfileDetails/"
 
 const Stack = createStackNavigator();
 
@@ -46,6 +49,28 @@ export default function App() {
         <Stack.Screen 
           name="Details"
           component={Details}
+          options={{
+            headerTintColor: "#325ca8",
+          }}
+        />
+        <Stack.Screen 
+          name="Profiles"
+          component={Profile}
+          options={{
+            headerTintColor: "#325ca8",
+            headerLeft: null,
+          }}
+        />
+        <Stack.Screen 
+          name="New Profile"
+          component={NewProfile}
+          options={{
+            headerTintColor: "#325ca8",
+          }}
+        />
+        <Stack.Screen 
+          name="Profile Details"
+          component={ProfileDetails}
           options={{
             headerTintColor: "#325ca8",
           }}

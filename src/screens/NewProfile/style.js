@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
-    buttonNewProduct: {
+    buttonNewProfile: {
         width: 60,
         height: 60,
         position: 'absolute',
@@ -33,11 +33,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    buttonLogin: {
-        width: "55%",
-        marginLeft: "auto",
-        marginRight: "auto",
     },
 })
 

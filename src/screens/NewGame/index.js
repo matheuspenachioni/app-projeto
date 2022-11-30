@@ -83,8 +83,9 @@ export default function NewGame({ navigation, route }, props) {
                     setImageUpload(event.target.files[0])
                 }}
             />
-            <button onClick={uploadImage}>
-                Upload
+            <button onClick={uploadImage}
+                style={styles.buttonLogin}>
+                    Upload Image
             </button>
 
                 <br />

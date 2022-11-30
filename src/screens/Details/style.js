@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    image: {
+        width: "90%",
+        height: "20%",
+        borderRadius: 5,
+        marginTop: 10,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
 })
 
 export default styles;

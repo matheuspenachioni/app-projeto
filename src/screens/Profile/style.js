@@ -5,32 +5,32 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    Products: {
+    Profiles: {
         width: "100%",
         flexDirection: "row",
         justifyContent: 'space-between',
         marginTop: 5,
         marginBottom: 5,
-        paddingBottom: 40,
+        paddingBottom: 30,
     },
-    deleteProduct: {
+    deleteProfile: {
         justifyContent: 'center',
         paddingLeft: 40,
     },
-    descriptionProduct: {
+    descriptionProfile: {
         width: "70%",
-        height: "110%",
+        height: "100%",
         alignContent: "flex-start",
         backgroundColor: "#f5f5f5cf",
         padding: 12,
-        paddingBottom: 80,
+        paddingBottom: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
         marginBottom: 5,
         marginRight: 15,
         color: "#282b2db5",
     },
-    buttonNewProduct: {
+    buttonNewProfile: {
         width: 60,
         height: 60,
         position: 'fixed',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    buttonProfile: {
+    buttonGames: {
         width: 60,
         height: 60,
         position: 'fixed',

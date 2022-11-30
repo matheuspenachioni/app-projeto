@@ -13,8 +13,8 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons"
 import firebase from "../../config/firebaseconfig.js"
 import styles from "./style.js"
 
-export default function Game({ navigation, route }) {
-    const [product, setProduct] = useState([])
+export default function Profile({ navigation, route }) {
+    const [profile, setProfile] = useState([])
     const database = firebase.firestore()
 
     function logout(){
@@ -25,19 +25,19 @@ export default function Game({ navigation, route }) {
           });
     }
 
-    function deleteProduct(id) {
+    function deleteProfile(id) {
         //route.params.idUser
-        database.collection("Produtos").doc(id).delete()
+        database.collection("Perfis").doc(id).delete()
     }
 
     useEffect(() => {
         //route.params.idUser
-        database.collection("Produtos").onSnapshot((query) => {
+        database.collection("Perfis").onSnapshot((query) => {
             const list = []
             query.forEach((doc) => {
                 list.push({ ...doc.data(), id: doc.id })
             })
-            setProduct(list)
+            setProfile(list)
         })
     }, [])
 
@@ -45,13 +45,13 @@ export default function Game({ navigation, route }) {
         <View style={styles.container}>
             <FlatList
                 showsVerticalScrollIndicator={false}
-                data={product}
+                data={profile}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.Products}>
+                        <View style={styles.Profiles}>
                             <TouchableOpacity
-                                style={styles.deleteProduct}
-                                onPress={() => deleteProduct(item.id)}
+                                style={styles.deleteProfile}
+                                onPress={() => deleteProfile(item.id)}
                             >
                                 <FontAwesome
                                     name="trash"
@@ -61,29 +61,31 @@ export default function Game({ navigation, route }) {
                                 </FontAwesome>
                             </TouchableOpacity>
                             <Text
-                                style={styles.descriptionProduct}
+                                style={styles.descriptionProfile}
                                 onPress={() => {
-                                    navigation.navigate("Details", {
+                                    navigation.navigate("Profile Details", {
                                         id: item.id,
                                         nome: item.nome,
-                                        marca: item.marca,
-                                        image: item.image,
-                                        preco: item.preco
+                                        apelido: item.apelido,
+                                        telefone: item.telefone,
+                                        endereco: item.endereco,
+                                        numeroendereco: item.numeroendereco,
+                                        cidade: item.cidade
                                     })
                                 }}
                             >
-                                <Image source={item.image} style={styles.image} /> <br />
-                                {item.nome} <br/>
-                                {item.marca} <br/>
-                                R$ {item.preco}
+                                <strong>Full Name</strong> <br/>{item.nome} <br/>
+                                <strong>Alias</strong> <br/>{item.apelido} <br/>
+                                <strong>Phone Number</strong> <br/>{item.telefone} <br/>
+                                <strong>Address</strong> <br/>{item.endereco} nº{item.numeroendereco}, {item.cidade}
                             </Text>
                         </View>
                     )
                 }}
             />
             <TouchableOpacity
-                style={styles.buttonNewProduct}
-                onPress={() => navigation.navigate("New Game")}
+                style={styles.buttonNewProfile}
+                onPress={() => navigation.navigate("New Profile")}
             >
                 <FontAwesome
                     name="plus"
@@ -93,11 +95,11 @@ export default function Game({ navigation, route }) {
                 </FontAwesome>
             </TouchableOpacity>
             <TouchableOpacity
-                style={styles.buttonProfile}
-                onPress={() => navigation.navigate("Profiles")}
+                style={styles.buttonGames}
+                onPress={() => navigation.navigate("Games")}
             >
                 <FontAwesome
-                    name="user"
+                    name="gamepad"
                     size={20}
                     color="#fff"
                 >
